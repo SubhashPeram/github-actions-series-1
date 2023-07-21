@@ -1,5 +1,5 @@
 //Security group creation and whitelisting the ip
-resource "aws_security_group" "allow_tls" {
+resource "aws_security_group" "allow_tls1" {
   name = "terraform-sg"
 
   ingress {
