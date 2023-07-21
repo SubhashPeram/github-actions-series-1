@@ -28,6 +28,6 @@ resource "aws_instance" "app_server" {
     Name = var.ec2_name
   }
 provisioner "remote-exec" {
-    command = "echo ${aws_instance.app_server.public_ip} >> /etc/testfile"
+    command = "echo ${aws_instance.app_server.public_ip} >> testfile.txt"
 }
 }
