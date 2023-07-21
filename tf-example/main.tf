@@ -27,7 +27,7 @@ resource "aws_instance" "app_server" {
   tags = {
     Name = var.ec2_name
   }
-provisioner "remote-exec" {
+provisioner "local-exec" {
     command = "echo ${aws_instance.app_server.public_ip} >> testfile.txt"
 }
 }
