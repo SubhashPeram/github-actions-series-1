@@ -1,6 +1,6 @@
 //Security group creation and whitelisting the ip
 resource "aws_security_group" "allow_tls" {
-  name = "terraform-sgp1"
+  name = "terraform-sgp2
   #name = var.ec2_name
   ingress {
     description = "Allow port 22 - inbound"
