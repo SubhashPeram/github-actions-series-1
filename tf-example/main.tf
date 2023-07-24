@@ -29,6 +29,6 @@ resource "aws_instance" "app_server" {
     Name = var.ec2_name
   }
  provisioner "local-exec" {
-     command = "echo ${aws_instance.app_server.public_ip} >> testfile.txt"
+     command = "echo ${aws_instance.app_server.public_ip} >> /home/ubuntu/testfile.txt"
  }
 }
