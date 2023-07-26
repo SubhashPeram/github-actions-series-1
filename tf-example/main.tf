@@ -30,13 +30,5 @@ resource "aws_instance" "app_server" {
   }
  provisioner "local-exec" {
      command = "echo ${aws_instance.app_server.public_ip} >> /home/ubuntu/testfile.txt"
- }
-
- output "EC2IPAddress" {
-   value = aws_instance.app_server.public_ip
- }
- output "EC2InstanceId" {
-   value = aws_instance.app_server.instance_id
- }
- 
+ } 
 }
