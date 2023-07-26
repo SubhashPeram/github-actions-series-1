@@ -36,6 +36,6 @@ resource "aws_instance" "app_server" {
 output "EC2IPAddress" {
   value = aws_instance.app_server.public_ip
 }
-output "EC2InstanceId" {
-  value = aws_instance.app_server.instance_id
+output "EC2PublicDNS" {
+  value = aws_instance.app_server.public_dns
 }
