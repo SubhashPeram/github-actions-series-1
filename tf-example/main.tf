@@ -42,14 +42,14 @@ resource "aws_instance" "app_server" {
   
     connection {
       type		= "ssh"
-	  user		= local.ssh_user
+	  user		= local.tf_user
 	  private_key = file(local.private_key_path)
 	  host		= aws_instance.app_server.public_ip
     }
 }
 
 provisioner "local-exec" {
-  command = "ansible-playbook -i $(aws_instance.app_server.public_ip), --private-key $(local.pri} deploy2tomcat.yml"
+  command = "ansible-playbook -i $(aws_instance.app_server.public_ip), --private-key $(local.private_key_path} deploy2tomcat.yml"
 }
   
  provisioner "local-exec" {
