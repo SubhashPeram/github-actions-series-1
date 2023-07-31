@@ -37,20 +37,7 @@ resource "aws_instance" "app_server" {
   tags = {
     Name = var.ec2_name
   }
-  provisioner "remote-exec" {
-    inline = ["echo 'Wait until SSH is ready'"]
-  
-    connection {
-      type		= "ssh"
-	  user		= local.tf_user
-	  private_key = file(local.private_key_path)
-	  host		= aws_instance.app_server.public_ip
-    }
-}
 
-provisioner "local-exec" {
-  command = "ansible-playbook -i $(aws_instance.app_server.public_ip), --private-key $(local.private_key_path} deploy2tomcat.yml"
-}
   
  provisioner "local-exec" {
      command = "echo ${aws_instance.app_server.public_ip} >> /home/ubuntu/testfile.txt"
