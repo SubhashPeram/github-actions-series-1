@@ -50,3 +50,6 @@ output "EC2IPAddress" {
 output "EC2PublicDNS" {
   value = aws_instance.app_server.public_dns
 }
+output "EC2AZ" {
+  value = aws_instance.app_server.availability_zone
+}
