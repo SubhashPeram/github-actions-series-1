@@ -26,9 +26,9 @@ terraform {
 provider "aws" {
   region  = "eu-north-1"
 }
-resource "aws_key_pair" "app-ssh-key" {
-  key_name = "app-ssh-key"
-  public_key = ""
+resource "aws_key_pair" "developer" {
+  key_name = "developer"
+  public_key = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCJVNzcZlBKJAlhGL8LNjHJ72AtXmE1aAI9X3bFOerujfYMxp2a8+dVJ2uXHe1nR4Y1fdOWLsHoDRDgBuqTasbBIiCblBwR41tanYJnvVSNMirPkRQD46y/p3sMWGatxF8WgKId329izCqS3dn5X3W0WfPYToFobsyD6doc0vG4SP4ZtGnm9G4lQnMjBFYBisdT4wOG5w0Oi51W2JvGbeBnZZuZQZzapsqNuJbKygC3M9WrCWF7i4ENJH+dC9GFDOzSjAMDF8UEPXwgFqRwBlqnz2HD4hxtC2eKSJuQWdiaQF2eCsX3fs6Xf8PL6Q9QDDVngRVXGw4jdzf+v38fvp3Jh2SFCdaBQFYCnEXtjrGSVdsAZX1o221lEHDd0HQqPYAeJr7fmR5zxzNVVOOql9ZbNxpVbHFxVnqPhS/AnJn7assTAIZo0Zv1x0IzDnenSo7WLH5jk+p6paiidf3J0/KTY8Hd6Z5nGFm5nKhk1G1Jt+/IvqYMoi7NMjSrFrqiejs= ubuntu@ip-172-31-33-94"
 }
 
 variable "privatekey" {
@@ -39,7 +39,7 @@ resource "aws_instance" "app_server" {
   instance_type = "t3.micro"
  # vpc_security_group_ids = [aws_security_group.allow_tls.id]
   security_groups = [aws_security_group.allow_tls.name]
-  key_name      = "app-ssh-key"
+  key_name      = "developer"
 
   tags = {
     Name = var.ec2_name
