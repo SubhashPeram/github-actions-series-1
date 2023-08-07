@@ -26,7 +26,14 @@ terraform {
 provider "aws" {
   region  = "eu-north-1"
 }
+resource "aws_key_pair" "app-ssh-key" {
+  key_name = "app-ssh-key"
+  public_key = ""
+}
 
+variable "privatekey" {
+  default = "developer"
+}
 resource "aws_instance" "app_server" {
   ami           = data.aws_ami.ubuntu.id
   instance_type = "t3.micro"
@@ -37,10 +44,19 @@ resource "aws_instance" "app_server" {
   tags = {
     Name = var.ec2_name
   }
-
+provisioner "remote-exec" {
+  inline = "echo 'build ssh connection' "
   
- provisioner "local-exec" {
-     command = "echo ${aws_instance.app_server.public_ip} >> /home/ubuntu/testfile.txt"
+connection {
+  type		= "ssh"
+  user		= "ubuntu"
+  private_key = file("./app-ssh-key")
+  host		= self.public_ip
+  }
+}
+
+provisioner "local-exec" {
+  command = "ansible-playbook -i ${aws_instance.app_server.public_ip}, --private-key ${var.privatekey} deploy2tomcat.yml"
  } 
 }
 
