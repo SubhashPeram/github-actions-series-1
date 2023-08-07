@@ -45,12 +45,14 @@ resource "aws_instance" "app_server" {
     Name = var.ec2_name
   }
 provisioner "remote-exec" {
-  inline = "echo 'build ssh connection' "
+  inline = [
+     "echo 'build ssh connection' "
+]
   
 connection {
   type		= "ssh"
   user		= "ubuntu"
-  private_key = file("./app-ssh-key")
+# private_key = file("./app-ssh-key")
   host		= self.public_ip
   }
 }
