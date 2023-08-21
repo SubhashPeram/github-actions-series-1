@@ -52,7 +52,7 @@ provisioner "remote-exec" {
 connection {
   type		= "ssh"
   user		= "ubuntu"
-  private_key = file("./developer")
+#  private_key = file("./developer")
   host		= self.public_ip
   }
 }
